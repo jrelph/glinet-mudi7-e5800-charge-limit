@@ -6,6 +6,13 @@ MAIN=$I2C/2-006b/sgm41542s
 PUMP=$I2C/2-006f/sgm41600
 STATE=/tmp/chargelimit_held
 
+# Prefer the MCU percentage (what the UI and screen show); fall back to the gauge.
+get_cap() {
+	c=$(ubus call mcu status 2>/dev/null | sed -n 's/.*"charge_percent": *\([0-9]*\).*/\1/p')
+	[ -n "$c" ] || c=$(cat $BAT/capacity 2>/dev/null)
+	echo "$c"
+}
+
 release() {
 	[ -f $STATE ] || return
 	echo 5100000 > $MAIN/ichrg_curr
@@ -38,7 +45,7 @@ while true; do
 	hys=$(uci -q get chargelimit.main.hysteresis)
 	[ -n "$lim" ] || lim=80
 	[ -n "$hys" ] || hys=5
-	cap=$(cat $BAT/capacity 2>/dev/null)
+	cap=$(get_cap)
 	if [ "$en" = 1 ] && [ -n "$cap" ]; then
 		if [ "$cap" -ge "$lim" ]; then
 			hold

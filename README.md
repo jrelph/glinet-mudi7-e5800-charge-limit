@@ -10,7 +10,7 @@ Behaviour: charging is paused at the limit and resumes at limit − 5%. Setting 
 
 ## Install (recommended: .ipk package)
 
-Copy `gl-sdk4-ui-chargelimit_1.0.0-1_aarch64_cortex-a53.ipk` to the router and run:
+Copy `gl-sdk4-ui-chargelimit_1.0.1-1_aarch64_cortex-a53.ipk` to the router and run:
 
     scp -O gl-sdk4-ui-chargelimit_*.ipk root@<router-ip>:/tmp/
     ssh root@<router-ip> opkg install /tmp/gl-sdk4-ui-chargelimit_*.ipk

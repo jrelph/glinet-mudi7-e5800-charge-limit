@@ -1,11 +1,11 @@
 Package: gl-sdk4-ui-chargelimit
-Version: 1.0.0-1
+Version: 1.0.1-1
 Depends: libc
 Section: gl
 Architecture: aarch64_cortex-a53
 Maintainer: community
 Description: Battery charge limit for GL.iNet E5800 (slider in USB & Power, status on Overview/Internet, LuCI page)
-Filename: gl-sdk4-ui-chargelimit_1.0.0-1_aarch64_cortex-a53.ipk
-Size: 4902
-SHA256sum: 3b0947bf532cc2f090306749ad029169bc306c323967fb0fc68f189129b7002d
+Filename: gl-sdk4-ui-chargelimit_1.0.1-1_aarch64_cortex-a53.ipk
+Size: 5026
+SHA256sum: ea8eb87f172dd2cf124a3011e130ca249556dbcae9809380ba5a50119076b479
 
