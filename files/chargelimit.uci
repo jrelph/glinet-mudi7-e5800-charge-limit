@@ -1,0 +1,4 @@
+config chargelimit 'main'
+	option enabled '1'
+	option limit '80'
+	option hysteresis '5'

@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Battery Charge Limit for GL.iNet Mudi 7 (GL-E5800)</title>
+<meta name="description" content="Cap your GL.iNet Mudi 7 battery at 80% to extend its lifespan. Install from the admin panel in under a minute.">
+<style>
+:root{--bg:#07090f;--panel:#0f1420;--line:#1d2638;--txt:#e6ebf5;--mut:#8b97b0;--a:#22e3c4;--b:#6c7bff;--warn:#ffb454}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px}
+header{padding:72px 0 34px;text-align:center}
+.badge{display:inline-block;padding:5px 14px;border:1px solid var(--line);border-radius:99px;color:var(--a);font-size:13px;letter-spacing:.08em;text-transform:uppercase;background:#0c1220}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.1;margin:20px 0 14px;font-weight:800;letter-spacing:-.02em;color:#fff}
+.sub{color:var(--mut);font-size:19px;max-width:640px;margin:0 auto}
+.stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:34px 0 8px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 22px;min-width:150px}
+.stat b{display:block;font-size:26px;color:var(--a)}
+.stat span{color:var(--mut);font-size:13px}
+h2{font-size:26px;margin:56px 0 10px;display:flex;gap:12px;align-items:center}
+h2 .n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--a);color:#06121a;font-weight:800;font-size:16px;flex:none}
+p{color:#b9c3d8;margin:8px 0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;margin:16px 0;box-shadow:0 10px 40px #0008}
+.shot{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);margin-top:14px;line-height:0}
+.shot img{width:100%;height:auto;display:block}
+.box{position:absolute;border:3px solid var(--warn);border-radius:10px;box-shadow:0 0 0 2px #0008}
+.tag{position:absolute;background:var(--warn);color:#1a1100;font:700 13px/1 system-ui;padding:6px 10px;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px #0009}
+.copy{display:flex;gap:10px;align-items:stretch;margin:12px 0}
+.copy code{flex:1;background:#070b14;border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--a);font:14px ui-monospace,SFMono-Regular,Menlo,monospace;overflow-x:auto;white-space:nowrap}
+button{background:var(--a);color:#06121a;border:0;border-radius:10px;padding:0 18px;font-weight:700;cursor:pointer}
+button:hover{filter:brightness(1.1)}
+.lbl{color:var(--mut);font-size:13px;text-transform:uppercase;letter-spacing:.08em;margin-top:14px}
+pre{background:#070b14;border:1px solid var(--line);border-radius:10px;padding:14px;color:#cfe7ff;overflow-x:auto;font:13.5px/1.6 ui-monospace,Menlo,monospace;margin:10px 0}
+ul{color:#b9c3d8;padding-left:20px}
+li{margin:6px 0}
+.note{border:1px solid #4a3a14;background:#1a1508;padding:12px 16px;border-radius:10px;color:#ffd9a0;margin:18px 0}
+a{color:var(--a)}
+footer{margin:70px 0 40px;padding-top:24px;border-top:1px solid var(--line);color:var(--mut);font-size:14px;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.grid .card{margin:0}
+.grid h3{margin:0 0 6px;font-size:16px;color:var(--a)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <span class="badge">GL.iNet Mudi 7 &middot; GL-E5800</span>
+  <h1>Battery Charge Limit</h1>
+  <p class="sub">Stop your travel router sitting at 100% on the charger. Cap it at 80% (or anything from 50&ndash;100%) to keep the battery healthy for longer.</p>
+  <div class="stats">
+    <div class="stat"><b>50&ndash;100%</b><span>adjustable limit</span></div>
+    <div class="stat"><b>1 min</b><span>to install</span></div>
+    <div class="stat"><b>Built-in UI</b><span>slider in the admin panel</span></div>
+  </div>
+</header>
+
+<section class="grid">
+  <div class="card"><h3>USB &amp; Power slider</h3><p>Switch + slider under System &rarr; USB &amp; Power.</p></div>
+  <div class="card"><h3>Shown on the dashboard</h3><p>Limit appears on Overview and next to the battery on the Internet page.</p></div>
+  <div class="card"><h3>Survives reboots</h3><p>Pauses charging at the limit, resumes 5% below it.</p></div>
+</section>
+
+<h2><span class="n">1</span> Open Plug-ins &rarr; Manage Sources</h2>
+<p>In the router admin panel go to <b>Applications &rarr; Plug-ins</b> and click <b>Manage Sources</b> (top right).</p>
+<div class="card"><div class="shot">
+  <img src="assets/plugins.jpg" alt="GL.iNet Plug-ins page">
+  <div class="box" style="left:82.5%;top:7.2%;width:11.6%;height:3.8%"></div>
+  <div class="tag" style="left:58%;top:7.6%">Click Manage Sources</div>
+  <div class="box" style="left:0;top:50.5%;width:16.5%;height:4.2%"></div>
+  <div class="tag" style="left:17.5%;top:51%">Applications &rarr; Plug-ins</div>
+</div></div>
+
+<h2><span class="n">2</span> Add the source</h2>
+<p>Enter a name and this URL, click the <b>+</b>, then <b>Apply</b>.</p>
+<div class="lbl">Name</div>
+<div class="copy"><code id="n">chargelimit</code><button onclick="c('n',this)">Copy</button></div>
+<div class="lbl">URL</div>
+<div class="copy"><code id="u">https://jrelph.github.io/glinet-mudi7-e5800-charge-limit/feed</code><button onclick="c('u',this)">Copy</button></div>
+<div class="card"><div class="shot">
+  <img src="assets/source.jpg" alt="Add Custom Software Source dialog">
+  <div class="box" style="left:10%;top:23.5%;width:24.2%;height:6.4%"></div>
+  <div class="tag" style="left:10%;top:31%">&#9312; Name</div>
+  <div class="box" style="left:35.6%;top:23.5%;width:46.6%;height:6.4%"></div>
+  <div class="tag" style="left:35.6%;top:31%">&#9313; URL</div>
+  <div class="box" style="left:84%;top:22.5%;width:6.4%;height:9.5%;border-radius:50%"></div>
+  <div class="tag" style="left:81%;top:11.5%">&#9314; Click +</div>
+  <div class="box" style="left:51.5%;top:85.5%;width:18.6%;height:6.7%;border-radius:40px"></div>
+  <div class="tag" style="left:72.5%;top:88%">&#9315; Apply</div>
+</div></div>
+
+<h2><span class="n">3</span> Install the plug-in</h2>
+<p>Back on Plug-ins, click <b>Refresh</b>, search for <b>chargelimit</b> and click <b>install</b>. Then hard-refresh your browser (<code>Cmd/Ctrl + Shift + R</code>).</p>
+<p>Find the slider under <b>System &rarr; USB &amp; Power</b>.</p>
+
+<h2>Prefer the command line?</h2>
+<pre>echo 'src/gz chargelimit https://jrelph.github.io/glinet-mudi7-e5800-charge-limit/feed' &gt;&gt; /etc/opkg/customfeeds.conf
+opkg update
+opkg install gl-sdk4-ui-chargelimit</pre>
+<p>Or download the <a href="feed/gl-sdk4-ui-chargelimit_1.0.0-1_aarch64_cortex-a53.ipk">.ipk</a> and run <code>opkg install</code> on it.</p>
+
+<h2>Uninstall</h2>
+<p>Click <b>uninstall</b> in Plug-ins (or <code>opkg remove gl-sdk4-ui-chargelimit</code>). Original UI files are restored and normal charging resumes.</p>
+
+<div class="note"><b>Good to know:</b> tested on GL-E5800 (Mudi 7), firmware 4.10.0. The stock charger daemon briefly re-enables charging, so the level can creep up a little over long periods on the charger. A firmware upgrade removes the UI patch &mdash; just reinstall the plug-in. Use at your own risk; this modifies system files.</div>
+
+<footer>
+  <a href="https://github.com/jrelph/glinet-mudi7-e5800-charge-limit">Source on GitHub</a> &middot; Unofficial, not affiliated with GL.iNet
+</footer>
+</div>
+<script>
+function c(id,b){navigator.clipboard.writeText(document.getElementById(id).textContent);var t=b.textContent;b.textContent='Copied!';setTimeout(function(){b.textContent=t},1400)}
+</script>
+</body>
+</html>

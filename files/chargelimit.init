@@ -1,0 +1,18 @@
+#!/bin/sh /etc/rc.common
+START=95
+USE_PROCD=1
+
+start_service() {
+	procd_open_instance
+	procd_set_param command /usr/bin/charge_limit.sh
+	procd_set_param respawn
+	procd_close_instance
+}
+
+stop_service() {
+	[ -f /tmp/chargelimit_held ] && {
+		echo 5100000 > /sys/devices/platform/soc/9c0000.qcom,qupv3_0_geni_se/994000.i2c/i2c-2/2-006b/sgm41542s/ichrg_curr
+		echo 1 > /sys/devices/platform/soc/9c0000.qcom,qupv3_0_geni_se/994000.i2c/i2c-2/2-006b/sgm41542s/charge_en
+		rm -f /tmp/chargelimit_held
+	}
+}

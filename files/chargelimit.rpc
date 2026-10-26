@@ -1,0 +1,33 @@
+--[[otstrapped
+    @object-name: chargelimit
+    @object-desc: battery charge limit
+--]]
+
+local M = {}
+local uci = require "uci"
+
+function M.get_config()
+    local c = uci.cursor()
+    local f = io.open("/sys/class/power_supply/cw221X-bat/capacity")
+    local cap = f and tonumber(f:read("*l")) or 0
+    if f then f:close() end
+    return {
+        enabled = tonumber(c:get("chargelimit", "main", "enabled")) or 0,
+        limit = tonumber(c:get("chargelimit", "main", "limit")) or 80,
+        capacity = cap,
+        held = (io.open("/tmp/chargelimit_held") ~= nil)
+    }
+end
+
+function M.set_config(params)
+    local c = uci.cursor()
+    local limit = tonumber(params.limit) or 80
+    if limit < 50 then limit = 50 end
+    if limit > 100 then limit = 100 end
+    c:set("chargelimit", "main", "enabled", (tonumber(params.enabled) == 1) and "1" or "0")
+    c:set("chargelimit", "main", "limit", tostring(math.floor(limit)))
+    c:commit("chargelimit")
+    return {}
+end
+
+return M
