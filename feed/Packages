@@ -4,8 +4,21 @@ Depends: libc
 Section: gl
 Architecture: aarch64_cortex-a53
 Maintainer: community
+Installed-Size: 32000
 Description: Battery charge limit for GL.iNet E5800 (slider in USB & Power, status on Overview/Internet, LuCI page)
 Filename: gl-sdk4-ui-chargelimit_1.0.1-1_aarch64_cortex-a53.ipk
-Size: 5026
-SHA256sum: ea8eb87f172dd2cf124a3011e130ca249556dbcae9809380ba5a50119076b479
+Size: 5005
+SHA256sum: 2b1db54723d49f11b5a2d2a1a5997b590b486ca5835345f20669a5fc8b2ebab3
+
+Package: gl-sdk4-ui-stockticker
+Version: 1.1.0-1
+Depends: libc, curl, lua-cjson, libuci-lua
+Section: gl
+Architecture: aarch64_cortex-a53
+Maintainer: community
+Installed-Size: 24000
+Description: Stock ticker for GL.iNet E5800 (quotes on the touchscreen lock screen + watchlist page at /stocks.html)
+Filename: gl-sdk4-ui-stockticker_1.1.0-1_aarch64_cortex-a53.ipk
+Size: 8977
+SHA256sum: f9bdcfdf2ba36bc0c980063e9c35e201ac2fb553948af610b16be72c5b0f3651
 

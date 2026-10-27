@@ -1,0 +1,7 @@
+config stockticker 'main'
+	option enabled '1'
+	option interval '300'
+	list symbol 'SPYG'
+	list symbol 'AAPL'
+	list symbol 'MSFT'
+	list symbol 'ASX:EOS'

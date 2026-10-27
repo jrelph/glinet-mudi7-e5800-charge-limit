@@ -1,0 +1,71 @@
+--[[otstrapped
+    @object-name: stockticker
+    @object-desc: stock watchlist and cached quotes
+--]]
+
+local M = {}
+local cjson = require "cjson"
+
+local SCRIPT = "/usr/bin/stockticker.lua"
+local CACHE = "/tmp/stockticker/quotes.json"
+
+local function lib()
+    local f = loadfile(SCRIPT)
+    if not f then return nil end
+    local ok, m = pcall(f, "lib")
+    return ok and m or nil
+end
+
+local function cached()
+    local f = io.open(CACHE, "r")
+    if not f then return { quotes = {} } end
+    local d = f:read("*a"); f:close()
+    local ok, j = pcall(cjson.decode, d)
+    return ok and type(j) == "table" and j or { quotes = {} }
+end
+
+local function refresh_async()
+    os.execute("(lua " .. SCRIPT .. " fetch >/dev/null 2>&1 &)")
+end
+
+function M.get_config()
+    local s = lib()
+    if not s then return { enabled = 0, interval = 300, symbols = {}, quotes = {}, error = "script missing" } end
+    local cfg = s.get_config()
+    local c = cached()
+    cfg.quotes = c.quotes or {}
+    cfg.updated = c.updated or 0
+    return cfg
+end
+
+function M.add_symbol(params)
+    local s = lib()
+    if not s then return { ok = false, error = "script missing" } end
+    local ok, err = s.add(tostring(params.symbol or ""))
+    if not ok then return { ok = false, error = err } end
+    refresh_async()
+    return { ok = true }
+end
+
+function M.remove_symbol(params)
+    local s = lib()
+    if not s then return { ok = false, error = "script missing" } end
+    local ok, err = s.remove(tostring(params.symbol or ""))
+    if not ok then return { ok = false, error = err } end
+    refresh_async()
+    return { ok = true }
+end
+
+function M.set_config(params)
+    local s = lib()
+    if not s then return { ok = false, error = "script missing" } end
+    s.set_options(params.enabled, params.interval)
+    return { ok = true }
+end
+
+function M.refresh()
+    refresh_async()
+    return { ok = true }
+end
+
+return M

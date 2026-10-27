@@ -1,53 +1,30 @@
-# GL.iNet Mudi 7 (GL-E5800) Battery Charge Limit
+# GL.iNet Mudi 7 (GL-E5800) Enhancements
 
-Adds a **maximum charge level** (50–100%, default 80%) to the GL.iNet admin panel to preserve battery life.
+Small plug-ins for the GL.iNet Mudi 7 travel router (tested on firmware 4.10.0). Install page: https://jrelph.github.io/glinet-mudi7-enhancements/
 
-- **System > USB & Power**: on/off switch + slider
-- **System > Overview** (Battery card): "Charge limit 80%" (adds "(holding)" while charging is paused)
-- **Internet page** banner: "61% / 80% limit" next to the battery icon
+| Plug-in | What it does |
+|---|---|
+| [`chargelimit`](chargelimit/) | Battery charge limit (50-100%, default 80%) with a slider in System > USB & Power, status on Overview and Internet. |
+| [`stockticker`](stockticker/) | Stock/ETF watchlist (`AAPL`, `SPYG`, `ASX:EOS`...) shown on the built-in touchscreen lock screen, plus a manage page at `/stocks.html`. |
 
-Behaviour: charging is paused at the limit and resumes at limit − 5%. Setting survives reboots.
+## Install via the GL.iNet UI
 
-## Install (recommended: .ipk package)
+Applications > Plug-ins > Manage Sources, add name `mudi7` and URL
+`https://jrelph.github.io/glinet-mudi7-enhancements/feed`, then Refresh and install the plug-in you want.
 
-Copy `gl-sdk4-ui-chargelimit_1.0.1-1_aarch64_cortex-a53.ipk` to the router and run:
+Or on the router:
 
-    scp -O gl-sdk4-ui-chargelimit_*.ipk root@<router-ip>:/tmp/
-    ssh root@<router-ip> opkg install /tmp/gl-sdk4-ui-chargelimit_*.ipk
+    echo 'src/gz mudi7 https://jrelph.github.io/glinet-mudi7-enhancements/feed' >> /etc/opkg/customfeeds.conf
+    opkg update && opkg install gl-sdk4-ui-chargelimit gl-sdk4-ui-stockticker
 
-Remove with `opkg remove gl-sdk4-ui-chargelimit` (restores the original UI files and normal charging).
-It also installs a LuCI page (Services > Battery Charge Limit) where LuCI is accessible.
+Each plug-in folder also has `install.sh` / `uninstall.sh` and its own README.
 
-## Install (script)
+## Build
 
-Requires SSH root access to the router. Tested on E5800, firmware 4.10.0.
+    ./build-feed.sh    # builds both ipks into feed/ and regenerates Packages(.gz)
 
-From your computer:
+## Notes
 
-    ./install-remote.sh <router-ip>
-
-Or copy this folder to the router and run `sh install.sh`. Then hard-refresh the browser.
-
-The installer checks hardware and does a dry run of the UI patches first; if your firmware differs it changes nothing.
-Originals are backed up in `/etc/chargelimit-backup`.
-
-## Uninstall
-
-    sh uninstall.sh   (on the router)
-
-## Notes / limitations
-
-- Hardware-specific (cw221X gauge, SGM41542S charger). Other models are refused.
-- The stock `quec_battery` daemon re-enables charging every ~20s; the limiter re-disables it every 0.2s (~2% leak), so the level may creep up slightly over a long time on the charger.
-- Never SIGSTOP/kill `quec_battery`: the watchdog reboots the router.
-- Firmware upgrades overwrite the UI patches; re-run `install.sh` afterwards.
-- Use at your own risk; modifies system files.
-
-## Install via custom feed (GL.iNet UI / opkg)
-
-Once `feed/` is hosted over HTTP(S) (e.g. GitHub Pages), add one line on the router, in
-Applications > Plug-ins > Settings (custom sources) or `/etc/opkg/customfeeds.conf`:
-
-    src/gz chargelimit https://jrelph.github.io/glinet-mudi7-e5800-charge-limit/feed
-
-then `opkg update && opkg install gl-sdk4-ui-chargelimit`.
+- Hardware- and firmware-specific; the installers refuse unsupported devices. Firmware upgrades wipe the patches: reinstall.
+- The stock ticker uses Yahoo's unofficial API (delayed, may break). Not financial advice.
+- Unofficial, not affiliated with GL.iNet. Use at your own risk; these modify system files.

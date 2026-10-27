@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Battery Charge Limit for GL.iNet Mudi 7 (GL-E5800)</title>
-<meta name="description" content="Cap your GL.iNet Mudi 7 battery at 80% to extend its lifespan. Install from the admin panel in under a minute.">
+<title>GL.iNet Mudi 7 (GL-E5800) Enhancements</title>
+<meta name="description" content="Plug-ins for the GL.iNet Mudi 7: a battery charge limit and a stock ticker for the built-in touchscreen. Install from the admin panel in under a minute.">
 <style>
 :root{--bg:#07090f;--panel:#0f1420;--line:#1d2638;--txt:#e6ebf5;--mut:#8b97b0;--a:#22e3c4;--b:#6c7bff;--warn:#ffb454}
 *{box-sizing:border-box}
@@ -47,19 +47,18 @@ footer{margin:70px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <div class="wrap">
 <header>
   <span class="badge">GL.iNet Mudi 7 &middot; GL-E5800</span>
-  <h1>Battery Charge Limit</h1>
-  <p class="sub">Stop your travel router sitting at 100% on the charger. Cap it at 80% (or anything from 50&ndash;100%) to keep the battery healthy for longer.</p>
+  <h1>Mudi 7 Enhancements</h1>
+  <p class="sub">Two small plug-ins for the travel router: cap the battery at 80% to keep it healthy, and see live stock prices on the built-in touchscreen.</p>
   <div class="stats">
-    <div class="stat"><b>50&ndash;100%</b><span>adjustable limit</span></div>
+    <div class="stat"><b>2</b><span>plug-ins, one feed</span></div>
     <div class="stat"><b>1 min</b><span>to install</span></div>
-    <div class="stat"><b>Built-in UI</b><span>slider in the admin panel</span></div>
+    <div class="stat"><b>Built-in UI</b><span>admin panel + touchscreen</span></div>
   </div>
 </header>
 
 <section class="grid">
-  <div class="card"><h3>USB &amp; Power slider</h3><p>Switch + slider under System &rarr; USB &amp; Power.</p></div>
-  <div class="card"><h3>Shown on the dashboard</h3><p>Limit appears on Overview and next to the battery on the Internet page.</p></div>
-  <div class="card"><h3>Survives reboots</h3><p>Pauses charging at the limit, resumes 5% below it.</p></div>
+  <div class="card"><h3>chargelimit</h3><p>Battery charge limit (50&ndash;100%, default 80%). Switch + slider under System &rarr; USB &amp; Power, shown on Overview and the Internet page. Pauses at the limit, resumes 5% below, survives reboots.</p></div>
+  <div class="card"><h3>stockticker</h3><p>Watchlist of stock codes (<code>AAPL</code>, <code>SPYG</code>, <code>ASX:EOS</code>&hellip;) shown on the touchscreen lock screen, plus a manage page at <code>/stocks.html</code>. Prices from Yahoo Finance, delayed.</p></div>
 </section>
 
 <h2><span class="n">1</span> Open Plug-ins &rarr; Manage Sources</h2>
@@ -75,9 +74,9 @@ footer{margin:70px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
 <h2><span class="n">2</span> Add the source</h2>
 <p>Enter a name and this URL, click the <b>+</b>, then <b>Apply</b>.</p>
 <div class="lbl">Name</div>
-<div class="copy"><code id="n">chargelimit</code><button onclick="c('n',this)">Copy</button></div>
+<div class="copy"><code id="n">mudi7</code><button onclick="c('n',this)">Copy</button></div>
 <div class="lbl">URL</div>
-<div class="copy"><code id="u">https://jrelph.github.io/glinet-mudi7-e5800-charge-limit/feed</code><button onclick="c('u',this)">Copy</button></div>
+<div class="copy"><code id="u">https://jrelph.github.io/glinet-mudi7-enhancements/feed</code><button onclick="c('u',this)">Copy</button></div>
 <div class="card"><div class="shot">
   <img src="assets/source.jpg" alt="Add Custom Software Source dialog">
   <div class="box" style="left:10%;top:23.5%;width:24.2%;height:6.4%"></div>
@@ -90,23 +89,23 @@ footer{margin:70px 0 40px;padding-top:24px;border-top:1px solid var(--line);colo
   <div class="tag" style="left:72.5%;top:88%">&#9315; Apply</div>
 </div></div>
 
-<h2><span class="n">3</span> Install the plug-in</h2>
-<p>Back on Plug-ins, click <b>Refresh</b>, search for <b>chargelimit</b> and click <b>install</b>. Then hard-refresh your browser (<code>Cmd/Ctrl + Shift + R</code>).</p>
-<p>Find the slider under <b>System &rarr; USB &amp; Power</b>.</p>
+<h2><span class="n">3</span> Install the plug-ins</h2>
+<p>Back on Plug-ins, click <b>Refresh</b>, search for <b>chargelimit</b> or <b>stockticker</b> and click <b>install</b>. Then hard-refresh your browser (<code>Cmd/Ctrl + Shift + R</code>).</p>
+<p>The charge limit slider is under <b>System &rarr; USB &amp; Power</b>. Stock quotes appear on the touchscreen lock screen; manage the list at <code>http://&lt;router-ip&gt;/stocks.html</code> (log in to the admin panel first).</p>
 
 <h2>Prefer the command line?</h2>
-<pre>echo 'src/gz chargelimit https://jrelph.github.io/glinet-mudi7-e5800-charge-limit/feed' &gt;&gt; /etc/opkg/customfeeds.conf
+<pre>echo 'src/gz mudi7 https://jrelph.github.io/glinet-mudi7-enhancements/feed' &gt;&gt; /etc/opkg/customfeeds.conf
 opkg update
-opkg install gl-sdk4-ui-chargelimit</pre>
-<p>Or download the <a href="feed/gl-sdk4-ui-chargelimit_1.0.1-1_aarch64_cortex-a53.ipk">.ipk</a> and run <code>opkg install</code> on it.</p>
+opkg install gl-sdk4-ui-chargelimit gl-sdk4-ui-stockticker</pre>
+<p>Or download an .ipk (<a href="feed/gl-sdk4-ui-chargelimit_1.0.1-1_aarch64_cortex-a53.ipk">chargelimit</a>, <a href="feed/gl-sdk4-ui-stockticker_1.1.0-1_aarch64_cortex-a53.ipk">stockticker</a>) and run <code>opkg install</code> on it.</p>
 
 <h2>Uninstall</h2>
-<p>Click <b>uninstall</b> in Plug-ins (or <code>opkg remove gl-sdk4-ui-chargelimit</code>). Original UI files are restored and normal charging resumes.</p>
+<p>Click <b>uninstall</b> in Plug-ins (or <code>opkg remove gl-sdk4-ui-chargelimit gl-sdk4-ui-stockticker</code>). Original UI files are restored, normal charging resumes, and your lock-screen text is put back.</p>
 
-<div class="note"><b>Good to know:</b> tested on GL-E5800 (Mudi 7), firmware 4.10.0. The stock charger daemon briefly re-enables charging, so the level can creep up a little over long periods on the charger. A firmware upgrade removes the UI patch &mdash; just reinstall the plug-in. Use at your own risk; this modifies system files.</div>
+<div class="note"><b>Good to know:</b> tested on GL-E5800 (Mudi 7), firmware 4.10.0. The stock charger daemon briefly re-enables charging, so the level can creep up a little over long periods on the charger. The stock ticker takes over the lock-screen &ldquo;signature&rdquo; text (your own text is saved and restored on uninstall). Quotes come from Yahoo&rsquo;s unofficial API, so they can break or be blocked. A firmware upgrade removes the UI patch &mdash; just reinstall. Use at your own risk; this modifies system files.</div>
 
 <footer>
-  <a href="https://github.com/jrelph/glinet-mudi7-e5800-charge-limit">Source on GitHub</a> &middot; Unofficial, not affiliated with GL.iNet
+  <a href="https://github.com/jrelph/glinet-mudi7-enhancements">Source on GitHub</a> &middot; Unofficial, not affiliated with GL.iNet
 </footer>
 </div>
 <script>
